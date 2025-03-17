@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holly Crist - Senior Web Developer</title>
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Color Variables */
+        :root {
+            --dark-bg: #34353a;
+            --light-bg: #f3efea;
+            --text-color: #333;
+            --heading-color: #333;
+            --border-color: #ddd;
+        }
+        
+        /* Basic Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+        }
+        
+        /* Header Styles */
+        .header {
+            background-color: var(--dark-bg);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid #b9985a;
+            margin-bottom: 20px;
+        }
+        
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            margin-bottom: 0;
+        }
+        
+        /* Triangle Shape */
+        .triangle {
+            width: 100%;
+            height: 50px;
+            position: relative;
+            background-color: var(--dark-bg);
+        }
+        
+        .triangle::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 50px 100vw 0 0;
+            border-color: var(--dark-bg) transparent transparent transparent;
+        }
+        
+        /* Main Content */
+        .main-content {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            background-color: var(--light-bg);
+            width: 30%;
+            padding: 40px 20px;
+        }
+        
+        /* Content */
+        .content {
+            width: 70%;
+            padding: 40px 30px;
+            background-color: white;
+        }
+        
+        /* Section Styles */
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: var(--heading-color);
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+        
+        /* Contact Details */
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-icon {
+            width: 24px;
+            height: 24px;
+            background-color: #333;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+        }
+        
+        /* Education */
+        .education-item {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .education-item::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 10px;
+            height: 10px;
+            background-color: #333;
+            border-radius: 50%;
+        }
+        
+        .education-item p {
+            margin: 5px 0;
+        }
+        
+        /* Skills */
+        .skill-item {
+            margin-bottom: 10px;
+        }
+        
+        /* Experience */
+        .experience-item {
+            margin-bottom: 30px;
+        }
+        
+        .experience-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .experience-meta {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .experience-list {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .experience-list li {
+            margin-bottom: 8px;
+        }
+        
+        /* References */
+        .references {
+            margin-top: 20px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .sidebar, .content {
+                width: 100%;
+            }
+            
+            .triangle::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="profile-photo">
+                <img src="https://www.sasban.online/basab.jpg" alt="Holly Crist">
+            </div>
+            <h1>Holly Crist</h1>
+            <p>Senior Web Developer</p>
+        </div>
+    </div>
+    
+    <div class="triangle"></div>
+    
+    <div class="main-content">
+        <div class="sidebar">
+            <div class="section">
+                <h2 class="section-title">Contact Details</h2>
+                <div class="contact-item">
+                    <div class="contact-icon">✉</div>
+                    <div>hollycrist@gmail.com</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">☎</div>
+                    <div>(068) 328 1825</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">⌂</div>
+                    <div>Nitzcheview, 71699, Kansas</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Education</h2>
+                <div class="education-item">
+                    <h3>Bachelor of Science in Computer Science</h3>
+                    <p>Stanford University</p>
+                    <p>2017 - 2021</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Skills</h2>
+                <div class="skill-item">HTML/CSS - Expert</div>
+                <div class="skill-item">JavaScript - Expert</div>
+                <div class="skill-item">Responsive Design - Expert</div>
+                <div class="skill-item">Node.js - Expert</div>
+                <div class="skill-item">React.js - Expert</div>
+                <div class="skill-item">Web Security - Expert</div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title">Summary</h2>
+                <p>Senior Web Developer experienced in full-stack development with a focus on JavaScript. Utilizes React, Node.js and MongoDB to create efficient, responsive websites.</p>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Work Experience</h2>
+                
+                <div class="experience-item">
+                    <div class="experience-title">Senior Web Developer, Grant, Blick and Schmitt</div>
+                    <div class="experience-meta">March 2023 - Present</div>
+                    <ul class="experience-list">
+                        <li>Developed and maintained a multi-platform web application for a large-scale e-commerce business.</li>
+                        <li>Developed and deployed web applications using HTML, CSS, JavaScript, and PHP.</li>
+                        <li>Designed and implemented database solutions for web applications.</li>
+                    </ul>
+                </div>
+                
+                <div class="experience-item">
+                    <div class="experience-title">Senior Web Developer, Hartmann and Sons</div>
+                    <div class="experience-meta">May 2021 - February 2023</div>
+                    <ul class="experience-list">
+                        <li>Utilized object-oriented programming principles to develop efficient and reliable web solutions.</li>
+                        <li>Maintained and optimized existing web applications and databases.</li>
+                        <li>Collaborated with clients to develop custom web solutions according to their needs.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">References</h2>
+                <p>References available upon request</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
