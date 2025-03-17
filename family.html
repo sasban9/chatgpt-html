@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Connect</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header styles */
+        header {
+            background-color: #4a6fa5;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        nav {
+            background-color: #3a5683;
+            padding: 0.5rem;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 1rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ffcb8c;
+        }
+        
+        /* Hero section */
+        .hero {
+            background-image: url('/api/placeholder/1200/600');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            z-index: 2;
+            padding: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: #e67e22;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: #d35400;
+        }
+        
+        /* Features section */
+        .features {
+            padding: 4rem 2rem;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+        
+        .features-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            flex: 0 0 calc(33.333% - 2rem);
+            margin: 1rem;
+            padding: 2rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #4a6fa5;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        /* Stories section */
+        .stories {
+            padding: 4rem 2rem;
+            background-color: #f5f5f5;
+        }
+        
+        .story-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .story-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        
+        .story-meta {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Contact section */
+        .contact {
+            padding: 4rem 2rem;
+            background-color: #2c3e50;
+            color: white;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 4px;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+        }
+        
+        .submit-button {
+            background-color: #e67e22;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-button:hover {
+            background-color: #d35400;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #34495e;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .footer-links {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links a {
+            color: #bdc3c7;
+            margin: 0 0.5rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .feature-card {
+                flex: 0 0 calc(50% - 2rem);
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .feature-card {
+                flex: 0 0 100%;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Family Connect</h1>
+        <p>Bringing families together, one moment at a time</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#stories">Stories</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Celebrate Family Moments</h1>
+            <p>Create, share, and cherish memories with your loved ones. Family Connect makes it easy to stay connected with those who matter most.</p>
+            <a href="#features" class="cta-button">Discover How</a>
+        </div>
+    </section>
+    
+    <section class="features" id="features">
+        <h2 class="section-title">What We Offer</h2>
+        <div class="features-container">
+            <div class="feature-card">
+                <div class="feature-icon">📸</div>
+                <h3>Photo Sharing</h3>
+                <p>Share your special moments with your family members through our easy-to-use photo sharing platform.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🗓️</div>
+                <h3>Family Calendar</h3>
+                <p>Keep track of important dates, birthdays, anniversaries, and family events in one central location.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👨‍👩‍👧‍👦</div>
+                <h3>Family Tree</h3>
+                <p>Document your family history and create a digital family tree that can be shared with generations to come.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Private Messaging</h3>
+                <p>Stay connected with your loved ones through secure, private messaging within the family group.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <h3>Achievement Sharing</h3>
+                <p>Celebrate milestones and achievements together, no matter the distance between you.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Privacy First</h3>
+                <p>Your family's data stays private and secure, with full control over what you share and with whom.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="stories" id="stories">
+        <h2 class="section-title">Family Stories</h2>
+        <div class="story-card">
+            <h3>The Johnsons' Reunion</h3>
+            <p class="story-meta">Posted by Sarah Johnson • March 10, 2025</p>
+            <p>After 15 years of living across different continents, our family finally managed to coordinate a reunion. With Family Connect, we planned every detail together, from accommodation to activities. The photo sharing feature allowed us to relive our childhood memories before meeting in person, and now we have a dedicated space to keep all our new memories together.</p>
+        </div>
+        <div class="story-card">
+            <h3>Preserving Grandma's Recipes</h3>
+            <p class="story-meta">Posted by Michael Torres • February 28, 2025</p>
+            <p>My grandmother has been the keeper of our family recipes for decades. As she got older, we worried that these treasured recipes might be lost. Through Family Connect, we created a digital cookbook where she could share her recipes with detailed instructions and photos. Now, her culinary legacy will live on for generations to come.</p>
+        </div>
+    </section>
+    
+    <section class="contact" id="contact">
+        <h2 class="section-title">Get in Touch</h2>
+        <div class="contact-form">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" placeholder="What would you like to know?"></textarea>
+            </div>
+            <button type="submit" class="submit-button">Send Message</button>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">FAQ</a>
+            <a href="#">Support</a>
+        </div>
+        <p class="copyright">© 2025 Family Connect. All rights reserved.</p>
+    </footer>
+</body>
+</html>
