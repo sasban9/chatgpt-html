@@ -1,11 +1,39 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
     <style>
+        /* Color variables */
+        :root {
+            /* Light mode colors */
+            --primary-color: #0D3B66;
+            --secondary-color: #F95738;
+            --accent-color: #EE964B;
+            --accent-light: #F4D35E;
+            --bg-light: #FAF0CA;
+            --bg-main: #ffffff;
+            --bg-secondary: #f4f4f4;
+            --text-color: #333333;
+            --text-light: #ffffff;
+            --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Dark mode colors */
+        [data-theme="dark"] {
+            --primary-color: #0D3B66;
+            --secondary-color: #F95738;
+            --accent-color: #EE964B;
+            --accent-light: #F4D35E;
+            --bg-light: #2c2c2c;
+            --bg-main: #121212;
+            --bg-secondary: #1e1e1e;
+            --text-color: #f0f0f0;
+            --text-light: #ffffff;
+            --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
         /* Reset some default browser styles */
         * {
             margin: 0;
@@ -16,8 +44,9 @@
         body {
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background-color: #f4f4f4;
+            color: var(--text-color);
+            background-color: var(--bg-secondary);
+            transition: background-color 0.3s, color 0.3s;
         }
         
         /* Container for all content */
@@ -30,10 +59,10 @@
         
         /* Header styling */
         header {
-            background-color: #35424a;
-            color: white;
+            background-color: var(--primary-color);
+            color: var(--text-light);
             padding: 20px 0;
-            border-bottom: 3px solid #e8491d;
+            border-bottom: 3px solid var(--secondary-color);
         }
         
         header .container {
@@ -47,13 +76,14 @@
         }
         
         header span {
-            color: #e8491d;
+            color: var(--secondary-color);
         }
         
         /* Navigation menu */
         nav ul {
             display: flex;
             list-style: none;
+            align-items: center;
         }
         
         nav li {
@@ -61,15 +91,31 @@
         }
         
         nav a {
-            color: white;
+            color: var(--text-light);
             text-decoration: none;
             text-transform: uppercase;
             font-size: 16px;
         }
         
         nav a:hover {
-            color: #e8491d;
+            color: var(--secondary-color);
             font-weight: bold;
+        }
+        
+        /* Theme toggle */
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+        }
+        
+        .theme-toggle i {
+            margin-right: 5px;
+            font-size: 18px;
         }
         
         /* Hero section */
@@ -78,7 +124,7 @@
             background-size: cover;
             background-position: center;
             height: 400px;
-            color: white;
+            color: var(--text-light);
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -99,8 +145,8 @@
         
         .btn {
             display: inline-block;
-            background-color: #e8491d;
-            color: white;
+            background-color: var(--secondary-color);
+            color: var(--text-light);
             padding: 10px 30px;
             border: none;
             border-radius: 5px;
@@ -111,13 +157,13 @@
         }
         
         .btn:hover {
-            background-color: #333;
+            background-color: var(--accent-color);
         }
         
         /* About section */
         .about {
             padding: 50px 0;
-            background-color: white;
+            background-color: var(--bg-main);
         }
         
         .about-content {
@@ -143,7 +189,7 @@
         /* Projects section */
         .projects {
             padding: 50px 0;
-            background-color: #f4f4f4;
+            background-color: var(--bg-secondary);
             text-align: center;
         }
         
@@ -159,10 +205,10 @@
         }
         
         .project-card {
-            background-color: white;
+            background-color: var(--bg-main);
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--card-shadow);
             transition: transform 0.3s;
         }
         
@@ -183,7 +229,7 @@
         /* Contact section */
         .contact {
             padding: 50px 0;
-            background-color: white;
+            background-color: var(--bg-main);
         }
         
         .contact h2 {
@@ -210,6 +256,8 @@
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
+            background-color: var(--bg-secondary);
+            color: var(--text-color);
         }
         
         textarea {
@@ -218,8 +266,8 @@
         
         /* Footer */
         footer {
-            background-color: #35424a;
-            color: white;
+            background-color: var(--primary-color);
+            color: var(--text-light);
             text-align: center;
             padding: 20px 0;
         }
@@ -245,7 +293,30 @@
                 margin-bottom: 30px;
             }
         }
+
+        /* Toggle icons */
+        .fa-sun, .fa-moon {
+            font-size: 20px;
+        }
+
+        [data-theme="light"] .fa-moon {
+            display: inline-block;
+        }
+
+        [data-theme="light"] .fa-sun {
+            display: none;
+        }
+
+        [data-theme="dark"] .fa-sun {
+            display: inline-block;
+        }
+
+        [data-theme="dark"] .fa-moon {
+            display: none;
+        }
     </style>
+    <!-- Font Awesome for theme toggle icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <!-- Header with Navigation -->
@@ -258,6 +329,13 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#contact">Contact</a></li>
+                    <li>
+                        <button id="theme-toggle" class="theme-toggle">
+                            <i class="fas fa-moon"></i>
+                            <i class="fas fa-sun"></i>
+                            <span id="theme-text">Dark Mode</span>
+                        </button>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -281,7 +359,7 @@
                     <p>When I'm not coding, you can find me exploring new technologies, reading tech blogs, or enjoying nature walks to get fresh inspiration.</p>
                 </div>
                 <div class="about-image">
-                    <img src="https://sasban.online/sasban.jpg" alt="My Photo">
+                    <img src="https://sasban.online/basab.jpg" alt="My Photo">
                 </div>
             </div>
         </div>
@@ -355,5 +433,35 @@
             <p>&copy; 2025 My Portfolio. All Rights Reserved.</p>
         </div>
     </footer>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeText = document.getElementById('theme-text');
+        
+        themeToggle.addEventListener('click', () => {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            
+            if (currentTheme === 'light') {
+                html.setAttribute('data-theme', 'dark');
+                themeText.textContent = 'Light Mode';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                html.setAttribute('data-theme', 'light');
+                themeText.textContent = 'Dark Mode';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Check for saved theme preference on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                themeText.textContent = savedTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+            }
+        });
+    </script>
 </body>
 </html>
