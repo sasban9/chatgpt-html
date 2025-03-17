@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Travel Adventures</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 0 1rem;
+        }
+        
+        .destinations {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .destination-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .destination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 20px rgba(0,0,0,0.2);
+        }
+        
+        .destination-image {
+            height: 200px;
+            background-position: center;
+            background-size: cover;
+            position: relative;
+        }
+        
+        .destination-image h2 {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 1rem;
+            margin: 0;
+        }
+        
+        .destination-content {
+            padding: 1.5rem;
+        }
+        
+        .london {
+            background-image: url('https://i.ytimg.com/vi/ZM7TBKD3a5U/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLA2sQKAvaSl6iVVDgYIrM_hk5giew');
+            background-color: #2d6a91;
+        }
+        
+        .tokyo {
+            background-image: url('https://citygame.com/wp-content/blogs.dir/1/files/sites/37/2023/02/City-Game-Tokyo-e1677225958158-1920x1080.jpg');
+            background-color: #ff6b6b;
+        }
+        
+        .greece {
+            background-image: url('https://i.ytimg.com/vi/k2P32ZRgPWQ/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBnDRkf12JJb7wbzCpcNoLKL2Yutg');
+            background-color: #4ca1a3;
+        }
+        
+        .rio {
+            background-image: url('https://www.pestana.com/en/destinos/south-america/brazil/rio-janeiro/_jcr_content/root/container/hero_banner/cmp-hero-banner__container__background-image.coreimg.jpeg/1733414709992/herobanner-region-rio-de-janeiro.jpeg');
+            background-color: #ffb347;
+        }
+        
+        .goa {
+            background-image: url('https://s7ap1.scene7.com/is/image/incredibleindia/1-palolem-beach-goa-goa-city-hero?qlt=82&ts=1726735654599');
+            background-color: #7bc043;
+        }
+        
+        .sydney {
+            background-image: url('https://cdn-imgix.headout.com/tour/20072/TOUR-IMAGE/d85280d5-3c4f-4f54-bd7a-6fc5cc68597f-10732-sydney-sydney-and-bondi-tour-with-sydney-opera-house-tour-01.jpg?auto=format&w=1051.2&h=540&q=90&fit=fit');
+            background-color: #1e90ff;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        .back-to-top {
+            display: inline-block;
+            background-color: #1e5799;
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .back-to-top:hover {
+            background-color: #2989d8;
+        }
+        
+        @media (max-width: 768px) {
+            .destinations {
+                grid-template-columns: 1fr;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Travel Adventures</h1>
+        <p>Exploring the world, one city at a time</p>
+    </header>
+    
+    <div class="container">
+        <section class="intro">
+            <h2>My Journey Around the World</h2>
+            <p>Over the years, I've been fortunate enough to visit some of the most incredible places on Earth. From the historic streets of London to the beaches of Sydney, each destination has left a unique impression on me. Here's a glimpse into my travel experiences.</p>
+        </section>
+        
+        <section class="destinations">
+            <div class="destination-card">
+                <div class="destination-image london">
+                    <h2>London</h2>
+                </div>
+                <div class="destination-content">
+                    <p>A city where history meets modernity. I explored iconic landmarks like Big Ben, the Tower of London, and enjoyed the vibrant atmosphere of Camden Market. The British Museum was a highlight of my visit.</p>
+                </div>
+            </div>
+            
+            <div class="destination-card">
+                <div class="destination-image tokyo">
+                    <h2>Tokyo</h2>
+                </div>
+                <div class="destination-content">
+                    <p>An incredible blend of tradition and cutting-edge technology. From the serene Meiji Shrine to the bustling Shibuya Crossing, Tokyo offers a unique cultural experience. The food scene is unmatched!</p>
+                </div>
+            </div>
+            
+            <div class="destination-card">
+                <div class="destination-image greece">
+                    <h2>Greece</h2>
+                </div>
+                <div class="destination-content">
+                    <p>With its stunning islands and ancient ruins, Greece was a dream destination. The white-washed buildings of Santorini, the historical significance of Athens, and the crystal-clear waters made it unforgettable.</p>
+                </div>
+            </div>
+            
+            <div class="destination-card">
+                <div class="destination-image rio">
+                    <h2>Rio de Janeiro</h2>
+                </div>
+                <div class="destination-content">
+                    <p>The rhythm of samba, the iconic Christ the Redeemer statue, and the beautiful Copacabana Beach make Rio a city of wonders. The vibrant culture and friendly locals made me feel welcome instantly.</p>
+                </div>
+            </div>
+            
+            <div class="destination-card">
+                <div class="destination-image goa">
+                    <h2>Goa</h2>
+                </div>
+                <div class="destination-content">
+                    <p>A perfect blend of Indian and Portuguese cultures with stunning beaches. Relaxing on the shores of Anjuna and exploring the colonial architecture in Old Goa was a unique experience.</p>
+                </div>
+            </div>
+            
+            <div class="destination-card">
+                <div class="destination-image sydney">
+                    <h2>Sydney</h2>
+                </div>
+                <div class="destination-content">
+                    <p>Famous for its Opera House and Harbour Bridge, Sydney offers beautiful beaches, excellent food, and a laid-back lifestyle. The coastal walks and ferry rides around the harbor were highlights of my visit.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 My Travel Adventures</p>
+        <p>Follow my journey as I continue to explore new destinations!</p>
+        <a href="#" class="back-to-top">Back to Top</a>
+    </footer>
+</body>
+</html>
