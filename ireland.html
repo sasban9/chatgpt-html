@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Ireland - The Emerald Isle</title>
+    <style>
+        /* Color Scheme: Inspired by the Indian flag and cultural colors */
+        :root {
+            --saffron: #FF9933;
+            --white: #FFFFFF;
+            --green: #138808;
+            --navy: #000080;
+            --terracotta: #c97c5d;
+            --gold: #FFD700;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #fcfcfc;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, var(--saffron), var(--white), var(--green));
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 20px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--navy);
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        
+        nav ul li a:hover {
+            background-color: var(--navy);
+            color: white;
+        }
+        
+        /* Hero Section */
+        #home {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.goway.com/production/styles/wide/s3/hero_image/shutterstock_641105455.jpg?VersionId=Guh0uP7g8L7Df9yoOx.PT8Q_GDa0xeio&itok=zVmRMYzY') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding-top: 60px;
+        }
+        
+        #home h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+        }
+        
+        #home p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+        }
+        
+        /* About Section */
+        #about {
+            padding: 80px 20px;
+            background-color: white;
+            text-align: center;
+        }
+        
+        #about h2 {
+            color: var(--navy);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        #about h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--saffron);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .about-content {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            text-align: left;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Features Section */
+        #features {
+            background-color: #f9f9f9;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        #features h2 {
+            color: var(--navy);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        #features h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--green);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .feature {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .feature h3 {
+            color: var(--terracotta);
+            margin: 15px 0;
+            font-size: 1.5rem;
+        }
+        
+        .feature p {
+            padding: 0 20px 20px;
+            color: #666;
+        }
+        
+        /* Testimonials Section */
+        #testimonials {
+            padding: 80px 20px;
+            background-color: white;
+            text-align: center;
+        }
+        
+        #testimonials h2 {
+            color: var(--navy);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        #testimonials h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--terracotta);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .testimonials-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .testimonial {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin: 15px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+        }
+        
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--navy);
+        }
+        
+        /* Contact Section */
+        #contact {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/api/placeholder/1200/600') no-repeat center center/cover;
+            padding: 80px 20px;
+            color: white;
+            text-align: center;
+        }
+        
+        #contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        #contact h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--gold);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        form input, form textarea {
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1rem;
+        }
+        
+        form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        form button {
+            background-color: var(--saffron);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        form button:hover {
+            background-color: var(--green);
+        }
+        
+        /* Footer Section */
+        footer {
+            background-color: var(--navy);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        footer p {
+            margin: 10px 0;
+        }
+        
+        .social-icons {
+            margin: 15px 0;
+        }
+        
+        .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: var(--gold);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #home h1 {
+                font-size: 2.5rem;
+            }
+            
+            #home p {
+                font-size: 1.2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Destinations</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home">
+        <h1>Discover Ireland</h1>
+        <p>Experience the magic, heritage, and breathtaking landscapes of the Emerald Isle</p>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>Explore Ireland</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Ireland is a land of enchanting beauty and rich cultural heritage - a mosaic of lush green landscapes, dramatic coastlines, ancient castles, and vibrant cities. From the rolling hills of the countryside to the rugged Cliffs of Moher, from medieval castles to lively pubs filled with traditional music, Ireland offers a journey that captures your imagination and warms your heart.</p>
+                <br>
+                <p>Our carefully curated travel experiences offer you authentic Irish hospitality, breathtaking scenery, and unforgettable adventures across this magnificent island. Whether you seek to trace your ancestral roots, explore literary heritage, marvel at natural wonders, or simply enjoy the warm welcome of the Irish people, Ireland promises an experience that will stay with you forever.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/27/fb/4e/c7/caption.jpg?w=1200&h=-1&s=1&cx=1920&cy=1080&chk=v1_fad31fcb323dab4628fe" alt="Irish Countryside">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <h2>Enchanting Destinations</h2>
+        <div class="features-grid">
+            <div class="feature">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCLRFF0PK4EhO6JA9J2qwOAdfDy0MCDKLf8Q&s" alt="Cliffs of Moher">
+                <h3>Cliffs of Moher</h3>
+                <p>Stand in awe before these majestic sea cliffs rising 214 meters above the Atlantic Ocean. One of Ireland's most spectacular natural wonders offering breathtaking views that stretch as far as the Aran Islands on a clear day.</p>
+            </div>
+            <div class="feature">
+                <img src="https://apetcher.wordpress.com/wp-content/uploads/2014/07/img_8819-e1406829021212.jpg" alt="Ring of Kerry">
+                <h3>Ring of Kerry</h3>
+                <p>Journey through this scenic drive that showcases some of Ireland's most stunning landscapes. The 179km circuit winds past pristine beaches, medieval ruins, mountains, and charming villages in County Kerry.</p>
+            </div>
+            <div class="feature">
+                <img src="https://ec2ggi9x8i8.exactdn.com/wp-content/uploads/2024/03/dublin-city-blog.jpeg?strip=all&lossy=1&sharp=1&ssl=1" alt="Dublin">
+                <h3>Dublin</h3>
+                <p>Explore Ireland's vibrant capital city, where historic landmarks like Trinity College and Dublin Castle meet modern culture. Experience the famous Irish hospitality in Temple Bar's traditional pubs and discover the home of Guinness.</p>
+            </div>
+            <div class="feature">
+                <img src="https://media.tacdn.com/media/attractions-splice-spp-674x446/06/8e/1c/9c.jpg" alt="Giant's Causeway">
+                <h3>Giant's Causeway</h3>
+                <p>Discover this geological wonder of 40,000 interlocking basalt columns, the result of an ancient volcanic eruption. According to legend, it was built by the giant Finn McCool as a pathway to Scotland.</p>
+            </div>
+            <div class="feature">
+                <img src="https://assets-eu-01.kc-usercontent.com/aa24ba70-9a12-01ae-259b-7ef588a0b2ef/6b7b7cd8-b0d8-462c-a9c2-6d6a92934e2f/header-eagles-nest-lakes-of-killarney-kerry.jpg" alt="Killarney National Park">
+                <h3>Killarney National Park</h3>
+                <p>Immerse yourself in Ireland's first national park, home to the country's only native herd of red deer. Explore lakes, mountains, and woodlands, and visit the majestic Muckross House and Gardens.</p>
+            </div>
+            <div class="feature">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Galway_cathedral.jpg" alt="Galway">
+                <h3>Galway</h3>
+                <p>Experience the cultural heart of Ireland in this colorful, bohemian city. Known for its vibrant street performances, traditional music sessions, annual arts festival, and as the gateway to the wild beauty of Connemara.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+        <h2>Traveler Stories</h2>
+        <div class="testimonials-container">
+            <div class="testimonial">
+                <p>"The warmth of the Irish people is as legendary as the landscapes. From singing in pubs to chatting with locals in small villages, the connections I made were the highlight of my trip."</p>
+                <p class="testimonial-author">- David Miller, Australia</p>
+            </div>
+            <div class="testimonial">
+                <p>"Driving the Wild Atlantic Way was an adventure I'll never forget. The dramatic coastline, hidden beaches, and charming fishing villages made every turn a new discovery."</p>
+                <p class="testimonial-author">- Lisa Thompson, USA</p>
+            </div>
+            <div class="testimonial">
+                <p>"As someone with Irish heritage, visiting Ireland was like coming home. Tracing my family roots in small country churchyards while experiencing modern Irish culture was deeply moving."</p>
+                <p class="testimonial-author">- Sean O'Brien, Canada</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Get in Touch</h2>
+        <p>Ready to begin your Irish adventure? Contact us today!</p>
+        <form>
+            <input type="text" placeholder="Your Name">
+            <input type="email" placeholder="Your Email">
+            <input type="text" placeholder="Subject">
+            <textarea placeholder="Your Message"></textarea>
+            <button>Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="social-icons">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">Twitter</a>
+            <a href="#">YouTube</a>
+        </div>
+        <p>&copy; 2025 Discover Ireland Travel. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
