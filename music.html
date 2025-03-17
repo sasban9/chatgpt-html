@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harmony Hub | Music Discovery</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+    
+    header {
+      background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
+      padding: 2rem 0;
+      text-align: center;
+    }
+    
+    .logo {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      gap: 2rem;
+    }
+    
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.3s;
+    }
+    
+    nav a:hover {
+      opacity: 0.8;
+    }
+    
+    .hero {
+      background-image: url("/api/placeholder/1200/600");
+      background-size: cover;
+      background-position: center;
+      height: 50vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+    
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      padding: 0 2rem;
+    }
+    
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .btn {
+      display: inline-block;
+      background-color: #1DB954;
+      color: white;
+      padding: 0.8rem 1.8rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.3s, background-color 0.3s;
+    }
+    
+    .btn:hover {
+      transform: translateY(-3px);
+      background-color: #1ed760;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, #3a1c71, #d76d77);
+    }
+    
+    .genres {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    
+    .genre-card {
+      background-color: #1e1e1e;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+    
+    .genre-card:hover {
+      transform: translateY(-10px);
+    }
+    
+    .genre-img {
+      height: 180px;
+      background-color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #ddd;
+    }
+    
+    .genre-content {
+      padding: 1.5rem;
+    }
+    
+    .genre-content h3 {
+      margin-bottom: 0.5rem;
+    }
+    
+    .top-artists {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .artist-card {
+      display: flex;
+      align-items: center;
+      background-color: #1e1e1e;
+      border-radius: 10px;
+      padding: 1rem;
+      transition: background-color 0.3s;
+    }
+    
+    .artist-card:hover {
+      background-color: #282828;
+    }
+    
+    .artist-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: #333;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+    
+    .artist-info h3 {
+      margin-bottom: 0.5rem;
+    }
+    
+    .artist-info p {
+      color: #b3b3b3;
+      font-size: 0.9rem;
+    }
+    
+    .newsletter {
+      text-align: center;
+      margin-top: 4rem;
+      padding: 3rem;
+      background-color: #1e1e1e;
+      border-radius: 10px;
+    }
+    
+    .newsletter h2 {
+      margin-bottom: 1rem;
+    }
+    
+    .newsletter p {
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      color: #b3b3b3;
+    }
+    
+    .form-group {
+      display: flex;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    
+    .form-group input {
+      flex: 1;
+      padding: 0.8rem 1.2rem;
+      border: none;
+      border-radius: 50px 0 0 50px;
+      font-size: 1rem;
+    }
+    
+    .form-group button {
+      background-color: #1DB954;
+      color: white;
+      border: none;
+      border-radius: 0 50px 50px 0;
+      padding: 0 1.5rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+    
+    .form-group button:hover {
+      background-color: #1ed760;
+    }
+    
+    footer {
+      background-color: #0a0a0a;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .social-link {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background-color: #333;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+    }
+    
+    .social-link:hover {
+      background-color: #1DB954;
+    }
+    
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .footer-nav a {
+      color: #b3b3b3;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    .footer-nav a:hover {
+      color: white;
+    }
+    
+    .copyright {
+      color: #b3b3b3;
+      font-size: 0.9rem;
+    }
+    
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .form-group {
+        flex-direction: column;
+      }
+      
+      .form-group input {
+        border-radius: 50px;
+        margin-bottom: 1rem;
+      }
+      
+      .form-group button {
+        border-radius: 50px;
+        padding: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Harmony Hub</div>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#genres">Genres</a></li>
+        <li><a href="#artists">Artists</a></li>
+        <li><a href="#newsletter">Subscribe</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Discover Your Next Favorite Song</h1>
+      <p>Explore new music, find hidden gems, and connect with your favorite artists all in one place.</p>
+      <a href="#genres" class="btn">Start Exploring</a>
+    </div>
+  </section>
+  
+  <section id="genres" class="container">
+    <h2 class="section-title">Popular Genres</h2>
+    <div class="genres">
+      <div class="genre-card">
+        <div class="genre-img">Pop</div>
+        <div class="genre-content">
+          <h3>Pop</h3>
+          <p>Chart-topping hits that everyone knows and loves.</p>
+        </div>
+      </div>
+      <div class="genre-card">
+        <div class="genre-img">Rock</div>
+        <div class="genre-content">
+          <h3>Rock</h3>
+          <p>From classic to alternative and everything in between.</p>
+        </div>
+      </div>
+      <div class="genre-card">
+        <div class="genre-img">Hip Hop</div>
+        <div class="genre-content">
+          <h3>Hip Hop</h3>
+          <p>Beats, rhymes, and life - the sound of the streets.</p>
+        </div>
+      </div>
+      <div class="genre-card">
+        <div class="genre-img">Electronic</div>
+        <div class="genre-content">
+          <h3>Electronic</h3>
+          <p>Digital soundscapes that push musical boundaries.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="artists" class="container">
+    <h2 class="section-title">Trending Artists</h2>
+    <div class="top-artists">
+      <div class="artist-card">
+        <div class="artist-img"></div>
+        <div class="artist-info">
+          <h3>Taylor Swift</h3>
+          <p>Pop, Country</p>
+        </div>
+      </div>
+      <div class="artist-card">
+        <div class="artist-img"></div>
+        <div class="artist-info">
+          <h3>The Weeknd</h3>
+          <p>R&B, Pop</p>
+        </div>
+      </div>
+      <div class="artist-card">
+        <div class="artist-img"></div>
+        <div class="artist-info">
+          <h3>Bad Bunny</h3>
+          <p>Latin, Reggaeton</p>
+        </div>
+      </div>
+      <div class="artist-card">
+        <div class="artist-img"></div>
+        <div class="artist-info">
+          <h3>Billie Eilish</h3>
+          <p>Alternative, Pop</p>
+        </div>
+      </div>
+      <div class="artist-card">
+        <div class="artist-img"></div>
+        <div class="artist-info">
+          <h3>Drake</h3>
+          <p>Hip Hop, R&B</p>
+        </div>
+      </div>
+      <div class="artist-card">
+        <div class="artist-img"></div>
+        <div class="artist-info">
+          <h3>Dua Lipa</h3>
+          <p>Pop, Dance</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="newsletter" class="container">
+    <div class="newsletter">
+      <h2>Stay Updated</h2>
+      <p>Subscribe to our newsletter for weekly music recommendations, artist spotlights, and exclusive content delivered straight to your inbox.</p>
+      <div class="form-group">
+        <input type="email" placeholder="Your email address">
+        <button>Subscribe</button>
+      </div>
+    </div>
+  </section>
+  
+  <footer>
+    <div class="social-links">
+      <a href="#" class="social-link">FB</a>
+      <a href="#" class="social-link">TW</a>
+      <a href="#" class="social-link">IG</a>
+      <a href="#" class="social-link">YT</a>
+      <a href="#" class="social-link">SC</a>
+    </div>
+    <div class="footer-nav">
+      <a href="#">About Us</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Contact</a>
+      <a href="#">FAQ</a>
+    </div>
+    <p class="copyright">© 2025 Harmony Hub. All rights reserved.</p>
+  </footer>
+</body>
+</html>
