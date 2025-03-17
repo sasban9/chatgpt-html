@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metropolitan Museum of Art</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f8f8;
+        }
+        
+        /* Header styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+        
+        /* Navigation styles */
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #9c7a3c;
+        }
+        
+        /* Hero section */
+        .hero {
+            height: 80vh;
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url("/api/placeholder/1200/800");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+            margin-top: 5rem;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: #9c7a3c;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: #876932;
+        }
+        
+        /* Featured exhibits section */
+        .featured-exhibits {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: #1a1a1a;
+        }
+        
+        .exhibits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .exhibit-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .exhibit-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .exhibit-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .exhibit-content {
+            padding: 1.5rem;
+        }
+        
+        .exhibit-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .exhibit-date {
+            color: #9c7a3c;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Information section */
+        .info-section {
+            background-color: #f0ece3;
+            padding: 5rem 5%;
+        }
+        
+        .info-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+        
+        .info-box {
+            text-align: center;
+        }
+        
+        .info-icon {
+            font-size: 2rem;
+            color: #9c7a3c;
+            margin-bottom: 1rem;
+        }
+        
+        .info-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 3rem 5%;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: #9c7a3c;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #fff;
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            text-align: center;
+            color: #777;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem 5%;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+            }
+            
+            nav ul li {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .hero {
+                height: 60vh;
+                margin-top: 7rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">Metropolitan Museum</a>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Exhibits</a></li>
+                    <li><a href="#">Collections</a></li>
+                    <li><a href="#">Visit</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Experience Art & History</h1>
+            <p>Explore thousands of years of human creativity and innovation through our world-class exhibits and collections.</p>
+            <a href="#" class="cta-button">Plan Your Visit</a>
+        </div>
+    </section>
+    
+    <!-- Featured Exhibits Section -->
+    <section class="featured-exhibits">
+        <h2 class="section-title">Featured Exhibits</h2>
+        <div class="exhibits-grid">
+            <div class="exhibit-card">
+                <div class="exhibit-image" style="background-image: url('/api/placeholder/600/400');"></div>
+                <div class="exhibit-content">
+                    <div class="exhibit-date">April 15 - August 28, 2025</div>
+                    <h3 class="exhibit-title">Renaissance Masterpieces</h3>
+                    <p>Discover the brilliance of Renaissance art through this curated collection of paintings and sculptures.</p>
+                </div>
+            </div>
+            <div class="exhibit-card">
+                <div class="exhibit-image" style="background-image: url('/api/placeholder/600/400');"></div>
+                <div class="exhibit-content">
+                    <div class="exhibit-date">March 1 - July 15, 2025</div>
+                    <h3 class="exhibit-title">Ancient Egypt: Treasures of the Nile</h3>
+                    <p>Journey through 3,000 years of Egyptian civilization with artifacts from the Nile Valley.</p>
+                </div>
+            </div>
+            <div class="exhibit-card">
+                <div class="exhibit-image" style="background-image: url('/api/placeholder/600/400');"></div>
+                <div class="exhibit-content">
+                    <div class="exhibit-date">February 10 - June 30, 2025</div>
+                    <h3 class="exhibit-title">Modern Art Movements</h3>
+                    <p>Explore the revolutionary ideas and techniques that shaped 20th century art.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Information Section -->
+    <section class="info-section">
+        <div class="info-container">
+            <div class="info-box">
+                <div class="info-icon">🕒</div>
+                <h3 class="info-title">Opening Hours</h3>
+                <p>Monday - Friday: 10am - 5pm<br>Saturday & Sunday: 9am - 6pm</p>
+            </div>
+            <div class="info-box">
+                <div class="info-icon">🎟️</div>
+                <h3 class="info-title">Admission</h3>
+                <p>Adults: $25<br>Students: $12<br>Children under 12: Free</p>
+            </div>
+            <div class="info-box">
+                <div class="info-icon">📍</div>
+                <h3 class="info-title">Location</h3>
+                <p>1000 Fifth Avenue<br>New York, NY 10028<br>United States</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="#">Our Mission</a></li>
+                    <li><a href="#">History</a></li>
+                    <li><a href="#">Staff</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Visit</h3>
+                <ul>
+                    <li><a href="#">Hours & Admission</a></li>
+                    <li><a href="#">Directions</a></li>
+                    <li><a href="#">Accessibility</a></li>
+                    <li><a href="#">Group Tours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">Donate</a></li>
+                    <li><a href="#">Membership</a></li>
+                    <li><a href="#">Volunteer</a></li>
+                    <li><a href="#">Corporate Sponsorship</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="#">Newsletter</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Twitter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Metropolitan Museum. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
