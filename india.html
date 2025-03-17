@@ -3,8 +3,379 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explore India</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Incredible India - Experience the Wonder</title>
+    <style>
+        /* Color Scheme: Inspired by the Indian flag and cultural colors */
+        :root {
+            --saffron: #FF9933;
+            --white: #FFFFFF;
+            --green: #138808;
+            --navy: #000080;
+            --terracotta: #c97c5d;
+            --gold: #FFD700;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #fcfcfc;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, var(--saffron), var(--white), var(--green));
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 20px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--navy);
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        
+        nav ul li a:hover {
+            background-color: var(--navy);
+            color: white;
+        }
+        
+        /* Hero Section */
+        #home {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/api/placeholder/1200/600') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding-top: 60px;
+        }
+        
+        #home h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+        }
+        
+        #home p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+        }
+        
+        /* About Section */
+        #about {
+            padding: 80px 20px;
+            background-color: white;
+            text-align: center;
+        }
+        
+        #about h2 {
+            color: var(--navy);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        #about h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--saffron);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .about-content {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            text-align: left;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Features Section */
+        #features {
+            background-color: #f9f9f9;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        #features h2 {
+            color: var(--navy);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        #features h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--green);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .feature {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .feature h3 {
+            color: var(--terracotta);
+            margin: 15px 0;
+            font-size: 1.5rem;
+        }
+        
+        .feature p {
+            padding: 0 20px 20px;
+            color: #666;
+        }
+        
+        /* Testimonials Section */
+        #testimonials {
+            padding: 80px 20px;
+            background-color: white;
+            text-align: center;
+        }
+        
+        #testimonials h2 {
+            color: var(--navy);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        #testimonials h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--terracotta);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .testimonials-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .testimonial {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin: 15px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+        }
+        
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--navy);
+        }
+        
+        /* Contact Section */
+        #contact {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/api/placeholder/1200/600') no-repeat center center/cover;
+            padding: 80px 20px;
+            color: white;
+            text-align: center;
+        }
+        
+        #contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        #contact h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--gold);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        form input, form textarea {
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1rem;
+        }
+        
+        form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        form button {
+            background-color: var(--saffron);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        form button:hover {
+            background-color: var(--green);
+        }
+        
+        /* Footer Section */
+        footer {
+            background-color: var(--navy);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        footer p {
+            margin: 10px 0;
+        }
+        
+        .social-icons {
+            margin: 15px 0;
+        }
+        
+        .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: var(--gold);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #home h1 {
+                font-size: 2.5rem;
+            }
+            
+            #home p {
+                font-size: 1.2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header Section -->
@@ -13,6 +384,8 @@
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#features">Destinations</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -20,56 +393,65 @@
 
     <!-- Hero Section -->
     <section id="home">
-        <h1>Welcome to Explore India</h1>
-        <p>Discover the beauty of India</p>
-        <img src="hero-image.jpg" alt="Hero Image">
+        <h1>Incredible India</h1>
+        <p>Experience the colors, culture, and diversity of the land of wonders</p>
     </section>
 
     <!-- About Section -->
     <section id="about">
-        <h2>About Us</h2>
-        <p>We are a team of travel enthusiasts who want to showcase the beauty of India.</p>
-        <img src="about-image.jpg" alt="About Image">
-    </section>
-
-    <!-- Features Section -->
-    <section id="features">
-        <h2>Explore India's Wonders</h2>
-        <div class="features-grid">
-            <div class="feature">
-                <img src="feature1-image.jpg" alt="Feature 1 Image">
-                <h3>Taj Mahal</h3>
-                <p>One of the Seven Wonders of the World</p>
+        <h2>Discover India</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>India is a land of extraordinary diversity - a mosaic of multicultural experiences, stunning landscapes, rich history, and spiritual traditions that span thousands of years. From the snow-capped Himalayas in the north to the tropical beaches in the south, from ancient temples to bustling modern cities, India offers a journey that awakens all your senses.</p>
+                <br>
+                <p>Our carefully curated travel experiences offer you authentic cultural immersion, breathtaking sights, and unforgettable adventures across this magnificent subcontinent. Whether you seek spiritual enlightenment, culinary exploration, architectural wonders, or simply the joy of connecting with warm and welcoming people, India promises a transformative experience that will stay with you forever.</p>
             </div>
-            <div class="feature">
-                <img src="feature2-image.jpg" alt="Feature 2 Image">
-                <h3>Red Fort</h3>
-                <p>A historic fort in Delhi</p>
-            </div>
-            <div class="feature">
-                <img src="feature3-image.jpg" alt="Feature 3 Image">
-                <h3>Goa Beaches</h3>
-                <p>Stunning beaches in Goa</p>
+            <div class="about-image">
+                <img src="/api/placeholder/600/400" alt="Indian Cultural Dancers">
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact">
-        <h2>Get in Touch</h2>
-        <p>Contact us to plan your trip to India</p>
-        <form>
-            <input type="text" placeholder="Name">
-            <input type="email" placeholder="Email">
-            <textarea placeholder="Message"></textarea>
-            <button>Send</button>
-        </form>
+    <!-- Features Section -->
+    <section id="features">
+        <h2>Mesmerizing Destinations</h2>
+        <div class="features-grid">
+            <div class="feature">
+                <img src="/api/placeholder/400/300" alt="Taj Mahal, Agra">
+                <h3>Taj Mahal, Agra</h3>
+                <p>Marvel at this iconic symbol of eternal love, a UNESCO World Heritage site and one of the Seven Wonders of the World. This white marble masterpiece was built by Emperor Shah Jahan in memory of his beloved wife.</p>
+            </div>
+            <div class="feature">
+                <img src="/api/placeholder/400/300" alt="Varanasi Ghats">
+                <h3>Varanasi Ghats</h3>
+                <p>Experience the spiritual heart of India on the banks of the sacred Ganges River. Witness the ancient rituals, morning prayers, and evening aarti ceremonies that have continued unbroken for thousands of years.</p>
+            </div>
+            <div class="feature">
+                <img src="/api/placeholder/400/300" alt="Jaipur Pink City">
+                <h3>Jaipur, The Pink City</h3>
+                <p>Explore the magnificent forts and palaces of Rajasthan's capital, known for its distinctive pink buildings, vibrant bazaars, and rich royal heritage that offers a glimpse into India's regal past.</p>
+            </div>
+            <div class="feature">
+                <img src="/api/placeholder/400/300" alt="Kerala Backwaters">
+                <h3>Kerala Backwaters</h3>
+                <p>Float along serene palm-fringed waterways on a traditional houseboat. Kerala's intricate network of lagoons, canals, and lakes offers a peaceful retreat amidst stunning natural beauty.</p>
+            </div>
+            <div class="feature">
+                <img src="/api/placeholder/400/300" alt="Ladakh Mountains">
+                <h3>Ladakh</h3>
+                <p>Discover the breathtaking high-altitude desert landscape dotted with Buddhist monasteries. Ladakh's dramatic mountains, clear blue skies, and unique culture make it a paradise for adventure seekers and spiritual travelers alike.</p>
+            </div>
+            <div class="feature">
+                <img src="/api/placeholder/400/300" alt="Goa Beaches">
+                <h3>Goa Beaches</h3>
+                <p>Relax on pristine sandy beaches along the Arabian Sea coast. Goa blends Portuguese colonial heritage with Indian culture, offering a perfect mix of relaxation, water sports, vibrant nightlife, and exquisite seafood.</p>
+            </div>
+        </div>
     </section>
 
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2023 Explore India</p>
-    </footer>
-
-</body>
-</html>
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+        <h2>Traveler Stories</h2>
+        <div class="testimonials-container">
+            <div class="testimonial">
+                <p>"My journey through Rajasthan was like stepping into a fairytale. The palaces, the colors, the food, and especially the warmth of the people made this the trip of a lifetime
