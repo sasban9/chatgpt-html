@@ -32,6 +32,7 @@ The `.vscode/launch.json` file includes configuration settings for launching the
 
 To view the pages locally, open any of the HTML files in your preferred web browser. You can also use the provided VS Code launch configuration to open `index.html`.
 
+```
 ## 📂 Directory Structure
 ├── family.html 
 ├── index.html 
@@ -52,6 +53,7 @@ To view the pages locally, open any of the HTML files in your preferred web brow
     ├── rio.jpeg 
     ├── sydney.jpg 
     └── tokyo.jpg
+```
 
 ## 📧 Contact
 
