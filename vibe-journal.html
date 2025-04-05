@@ -88,7 +88,127 @@
     <button onclick="openModal()">Add New Entry</button>
     <h2>Previous Entries</h2>
     <div id="entries"></div>
+    <button onclick="expandAll()">Expand All</button>
+    <button onclick="collapseAll()">Collapse All</button>
+    <div id="calendar"></div>
+    <script>
+        function generateCalendar() {
+            const calendarContainer = document.getElementById('calendar');
+            calendarContainer.innerHTML = '';
 
+            const entries = JSON.parse(localStorage.getItem('journalEntries')) || [];
+            const entryDates = entries.map(entry => new Date(entry.date).toDateString());
+
+            const currentDate = new Date();
+            const currentYear = currentDate.getFullYear();
+            const currentMonth = currentDate.getMonth();
+
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+            const calendarTable = document.createElement('table');
+            calendarTable.className = 'calendar';
+
+            const headerRow = document.createElement('tr');
+            ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(day => {
+                const th = document.createElement('th');
+                th.textContent = day;
+                headerRow.appendChild(th);
+            });
+            calendarTable.appendChild(headerRow);
+
+            let date = 1;
+            for (let i = 0; i < 6; i++) {
+                const row = document.createElement('tr');
+
+                for (let j = 0; j < 7; j++) {
+                    const cell = document.createElement('td');
+                    if (i === 0 && j < firstDay) {
+                        cell.textContent = '';
+                    } else if (date > daysInMonth) {
+                        break;
+                    } else {
+                        const cellDate = new Date(currentYear, currentMonth, date).toDateString();
+                        cell.textContent = date;
+                        if (entryDates.includes(cellDate)) {
+                            cell.style.backgroundColor = '#1DB954';
+                            cell.style.color = '#FFFFFF';
+                            cell.style.borderRadius = '50%';
+                        }
+                        date++;
+                    }
+                    row.appendChild(cell);
+                }
+                calendarTable.appendChild(row);
+            }
+
+            calendarContainer.appendChild(calendarTable);
+        }
+
+        // Generate calendar on page load
+        generateCalendar();
+    </script>
+    <script>
+        function groupEntriesByMonth(entries) {
+            return entries.reduce((groups, entry) => {
+                const month = new Date(entry.date).toLocaleString('default', { month: 'long', year: 'numeric' });
+                if (!groups[month]) {
+                    groups[month] = [];
+                }
+                groups[month].push(entry);
+                return groups;
+            }, {});
+        }
+
+        function displayEntries() {
+            const entries = JSON.parse(localStorage.getItem('journalEntries')) || [];
+            const groupedEntries = groupEntriesByMonth(entries);
+            const entriesContainer = document.getElementById('entries');
+            entriesContainer.innerHTML = '';
+
+            Object.keys(groupedEntries)
+                .sort((a, b) => new Date(b) - new Date(a)) // Reverse chronological order
+                .forEach(month => {
+                    const monthDiv = document.createElement('div');
+                    monthDiv.className = 'month-group';
+
+                    const monthHeader = document.createElement('button');
+                    monthHeader.className = 'accordion';
+                    monthHeader.textContent = month;
+                    monthHeader.onclick = function () {
+                        const panel = this.nextElementSibling;
+                        panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+                    };
+
+                    const monthPanel = document.createElement('div');
+                    monthPanel.className = 'panel';
+                    monthPanel.style.display = 'none';
+
+                    groupedEntries[month].forEach(entry => {
+                        const entryDiv = document.createElement('div');
+                        entryDiv.className = 'entry';
+                        entryDiv.innerHTML = `<strong>${entry.date}</strong><p>${entry.text}</p>`;
+                        monthPanel.appendChild(entryDiv);
+                    });
+
+                    monthDiv.appendChild(monthHeader);
+                    monthDiv.appendChild(monthPanel);
+                    entriesContainer.appendChild(monthDiv);
+                });
+        }
+
+        function expandAll() {
+            document.querySelectorAll('.panel').forEach(panel => {
+                panel.style.display = 'block';
+            });
+        }
+
+        function collapseAll() {
+            document.querySelectorAll('.panel').forEach(panel => {
+                panel.style.display = 'none';
+            });
+        }
+    </script>
     <!-- Modal -->
     <div id="entryModal" class="modal">
         <div class="modal-content">
