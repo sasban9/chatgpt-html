@@ -31,7 +31,7 @@
 
         h1 {
             text-align: center;
-            color: #fff;
+            color: #6c63ff;
         }
 
         form {
@@ -110,6 +110,28 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
+
+        .months {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .month {
+            padding: 1rem;
+            background-color: #6c63ff;
+            color: #fff;
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .month:hover {
+            background-color: #5753d6;
+        }
     </style>
 </head>
 <body>
@@ -133,6 +155,10 @@
             <button type="submit">Add Entry</button>
         </form>
         <div class="entries" id="entries"></div>
+        <h2>Months with Entries</h2>
+        <div class="months" id="monthsContainer">
+            <!-- Months will be dynamically loaded here -->
+        </div>
     </main>
     <script>
         const form = document.getElementById('journalForm');
@@ -189,8 +215,33 @@
             }
         });
 
-        // Load entries on page load
+        // Fetch and display months with entries
+        async function loadMonths() {
+            const response = await fetch(API_URL);
+            const entries = await response.json();
+
+            const months = new Set();
+            entries.forEach(entry => {
+                const date = new Date(entry.date);
+                const month = date.toLocaleString('default', { month: 'long', year: 'numeric' });
+                months.add(month);
+            });
+
+            const monthsContainer = document.getElementById('monthsContainer');
+            monthsContainer.innerHTML = '';
+
+            Array.from(months).forEach(month => {
+                const monthDiv = document.createElement('a');
+                monthDiv.classList.add('month');
+                monthDiv.href = `entries.html?month=${encodeURIComponent(month)}`;
+                monthDiv.textContent = month;
+                monthsContainer.appendChild(monthDiv);
+            });
+        }
+
+        // Load entries and months on page load
         loadEntries();
+        loadMonths();
     </script>
 </body>
 </html>

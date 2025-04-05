@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal Entries</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #6c63ff;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        main {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #6c63ff;
+        }
+
+        .entries {
+            margin-top: 2rem;
+        }
+
+        .entry {
+            background: #f9f9f9;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .entry .mood {
+            font-size: 1.5rem;
+        }
+
+        .entry .date {
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Journal Entries</h1>
+    </header>
+    <main>
+        <h2 id="monthTitle"></h2>
+        <div class="entries" id="entriesContainer">
+            <!-- Entries will be dynamically loaded here -->
+        </div>
+    </main>
+    <script>
+        const API_URL = 'http://localhost:3000/entries';
+
+        // Get the month from the query string
+        const params = new URLSearchParams(window.location.search);
+        const month = params.get('month');
+        document.getElementById('monthTitle').textContent = `Entries for ${month}`;
+
+        // Fetch and display entries for the selected month
+        async function loadEntries() {
+            const response = await fetch(API_URL);
+            const entries = await response.json();
+
+            const filteredEntries = entries.filter(entry => {
+                const date = new Date(entry.date);
+                const entryMonth = date.toLocaleString('default', { month: 'long', year: 'numeric' });
+                return entryMonth === month;
+            });
+
+            const entriesContainer = document.getElementById('entriesContainer');
+            entriesContainer.innerHTML = '';
+
+            filteredEntries.forEach(entry => {
+                const entryDiv = document.createElement('div');
+                entryDiv.classList.add('entry');
+                entryDiv.innerHTML = `
+                    <div class="mood">${entry.mood}</div>
+                    <div class="date">${entry.date}</div>
+                    <p>${entry.text}</p>
+                `;
+                entriesContainer.appendChild(entryDiv);
+            });
+        }
+
+        // Load entries on page load
+        loadEntries();
+    </script>
+</body>
+</html>
