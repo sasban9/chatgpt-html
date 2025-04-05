@@ -29,62 +29,15 @@
             overflow: hidden;
         }
 
-        .form-container {
-            width: 40%;
-            padding: 1rem;
-            background: #fff;
-            border-right: 1px solid #ddd;
-            overflow-y: auto;
-        }
-
         .entries-container {
-            width: 60%;
+            width: 100%;
             padding: 1rem;
             overflow-y: auto;
         }
 
         h1 {
             text-align: center;
-            color: #6c63ff;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        textarea {
-            width: 100%;
-            height: 100px;
-            padding: 0.5rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            resize: none;
-        }
-
-        .mood-selector {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .mood-selector label {
-            cursor: pointer;
-            font-size: 1.5rem;
-        }
-
-        button {
-            padding: 0.8rem;
-            background-color: #6c63ff;
             color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        button:hover {
-            background-color: #5753d6;
         }
 
         .accordion {
@@ -133,31 +86,107 @@
             color: #666;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            main {
-                flex-direction: column;
-            }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
 
-            .form-container,
-            .entries-container {
-                width: 100%;
-                border-right: none;
-                border-bottom: 1px solid #ddd;
-            }
+        .modal-content {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+        }
 
-            .entries-container {
-                border-bottom: none;
-            }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: #6c63ff;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6c63ff;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: none;
+        }
+
+        .mood-selector {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .mood-selector label {
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        button {
+            padding: 0.8rem;
+            background-color: #6c63ff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        button:hover {
+            background-color: #5753d6;
         }
     </style>
 </head>
 <body>
     <header>
         <h1>Journal with Accordion</h1>
+        <button id="openModalBtn" style="padding: 0.5rem 1rem; background-color: #fff; color: #6c63ff; border: 1px solid #6c63ff; border-radius: 4px; cursor: pointer;">Add Entry</button>
     </header>
     <main>
-        <div class="form-container">
+        <div class="entries-container">
+            <div class="accordion" id="accordionContainer">
+                <!-- Accordion items will be dynamically loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal -->
+    <div class="modal" id="entryModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Journal Entry</h2>
+                <button class="close-btn" id="closeModalBtn">&times;</button>
+            </div>
             <form id="journalForm">
                 <textarea id="entryText" placeholder="How was your day?"></textarea>
                 <div class="mood-selector">
@@ -174,16 +203,33 @@
                 <button type="submit">Add Entry</button>
             </form>
         </div>
-        <div class="entries-container">
-            <div class="accordion" id="accordionContainer">
-                <!-- Accordion items will be dynamically loaded here -->
-            </div>
-        </div>
-    </main>
+    </div>
+
     <script>
         const form = document.getElementById('journalForm');
         const accordionContainer = document.getElementById('accordionContainer');
         const API_URL = 'http://localhost:3000/entries';
+
+        const modal = document.getElementById('entryModal');
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        // Open modal
+        openModalBtn.addEventListener('click', () => {
+            modal.style.display = 'flex';
+        });
+
+        // Close modal
+        closeModalBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside the modal content
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
 
         // Fetch and display entries grouped by month in reverse chronology
         async function loadEntries() {
@@ -267,6 +313,7 @@
             if (response.ok) {
                 loadEntries();
                 form.reset();
+                modal.style.display = 'none';
             } else {
                 alert('Failed to add entry.');
             }
