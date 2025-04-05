@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Journal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Vibe Journal</h1>
+    <button onclick="openModal()">Add New Entry</button>
+    <button onclick="expandAll()">Expand All</button>
+    <button onclick="collapseAll()">Collapse All</button>
+    <h2>Monthly Entries</h2>
+    <div id="entries"></div>
+
+    <!-- Modal -->
+    <div id="entryModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">X</button>
+            <input type="date" id="entryDate" placeholder="Select a date">
+            <textarea id="journalEntry" placeholder="Write your thoughts here..."></textarea>
+            <div>
+                <label for="sentiment">How are you feeling?</label>
+                <div id="sentiment">
+                    <span onclick="setSentiment('😊')" style="cursor: pointer;">😊</span>
+                    <span onclick="setSentiment('😐')" style="cursor: pointer;">😐</span>
+                    <span onclick="setSentiment('😢')" style="cursor: pointer;">😢</span>
+                    <span onclick="setSentiment('😡')" style="cursor: pointer;">😡</span>
+                    <span onclick="setSentiment('😂')" style="cursor: pointer;">😂</span>
+                    <span onclick="setSentiment('😍')" style="cursor: pointer;">😍</span>
+                    <span onclick="setSentiment('😴')" style="cursor: pointer;">😴</span>
+                    <span onclick="setSentiment('🤔')" style="cursor: pointer;">🤔</span>
+                </div>
+            </div>
+            <button onclick="saveEntry()">Save Entry</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
