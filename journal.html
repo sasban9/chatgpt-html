@@ -93,11 +93,28 @@
             font-size: 0.9rem;
             color: #666;
         }
+
+        .date-picker {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .date-picker label {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .date-picker input {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>Vibe Journal</h1>
+        <h1>JOURNAL BY SASBAN</h1>
     </header>
     <main>
         <form id="journalForm">
@@ -108,6 +125,10 @@
                 <label><input type="radio" name="mood" value="😢"> 😢</label>
                 <label><input type="radio" name="mood" value="😡"> 😡</label>
                 <label><input type="radio" name="mood" value="😍"> 😍</label>
+            </div>
+            <div class="date-picker">
+                <label for="entryDate">Select Date:</label>
+                <input type="date" id="entryDate" value="">
             </div>
             <button type="submit">Add Entry</button>
         </form>
@@ -141,6 +162,7 @@
 
             const text = document.getElementById('entryText').value;
             const mood = document.querySelector('input[name="mood"]:checked')?.value;
+            const date = document.getElementById('entryDate').value || new Date().toLocaleDateString();
 
             if (!text || !mood) {
                 alert('Please write an entry and select a mood!');
@@ -150,7 +172,7 @@
             const newEntry = {
                 text,
                 mood,
-                date: new Date().toLocaleDateString()
+                date
             };
 
             const response = await fetch(API_URL, {
