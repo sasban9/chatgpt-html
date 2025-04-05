@@ -132,6 +132,24 @@
             font-size: 0.9rem;
             color: #666;
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            main {
+                flex-direction: column;
+            }
+
+            .form-container,
+            .entries-container {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .entries-container {
+                border-bottom: none;
+            }
+        }
     </style>
 </head>
 <body>
