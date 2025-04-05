@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal with Accordion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            background-color: #6c63ff;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        main {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .form-container {
+            width: 40%;
+            padding: 1rem;
+            background: #fff;
+            border-right: 1px solid #ddd;
+            overflow-y: auto;
+        }
+
+        .entries-container {
+            width: 60%;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #6c63ff;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: none;
+        }
+
+        .mood-selector {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .mood-selector label {
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        button {
+            padding: 0.8rem;
+            background-color: #6c63ff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        button:hover {
+            background-color: #5753d6;
+        }
+
+        .accordion {
+            margin-top: 1rem;
+        }
+
+        .accordion-item {
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background-color: #6c63ff;
+            color: #fff;
+            padding: 1rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .accordion-header:hover {
+            background-color: #5753d6;
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 1rem;
+            background: #f9f9f9;
+        }
+
+        .entry {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .entry .mood {
+            font-size: 1.5rem;
+        }
+
+        .entry .date {
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Journal with Accordion</h1>
+    </header>
+    <main>
+        <div class="form-container">
+            <form id="journalForm">
+                <textarea id="entryText" placeholder="How was your day?"></textarea>
+                <div class="mood-selector">
+                    <label><input type="radio" name="mood" value="😊"> 😊</label>
+                    <label><input type="radio" name="mood" value="😐"> 😐</label>
+                    <label><input type="radio" name="mood" value="😢"> 😢</label>
+                    <label><input type="radio" name="mood" value="😡"> 😡</label>
+                    <label><input type="radio" name="mood" value="😍"> 😍</label>
+                </div>
+                <div class="date-picker">
+                    <label for="entryDate">Select Date:</label>
+                    <input type="date" id="entryDate" value="">
+                </div>
+                <button type="submit">Add Entry</button>
+            </form>
+        </div>
+        <div class="entries-container">
+            <div class="accordion" id="accordionContainer">
+                <!-- Accordion items will be dynamically loaded here -->
+            </div>
+        </div>
+    </main>
+    <script>
+        const form = document.getElementById('journalForm');
+        const accordionContainer = document.getElementById('accordionContainer');
+        const API_URL = 'http://localhost:3000/entries';
+
+        // Fetch and display entries grouped by month in reverse chronology
+        async function loadEntries() {
+            const response = await fetch(API_URL);
+            const entries = await response.json();
+
+            // Group entries by month and year
+            const groupedEntries = entries.reduce((acc, entry) => {
+                const date = new Date(entry.date);
+                const monthYear = date.toLocaleString('default', { month: 'long', year: 'numeric' });
+                if (!acc[monthYear]) acc[monthYear] = [];
+                acc[monthYear].push(entry);
+                return acc;
+            }, {});
+
+            // Sort months in reverse chronology
+            const sortedMonths = Object.keys(groupedEntries).sort((a, b) => {
+                const [monthA, yearA] = a.split(' ');
+                const [monthB, yearB] = b.split(' ');
+                return new Date(`${monthB} 1, ${yearB}`) - new Date(`${monthA} 1, ${yearA}`);
+            });
+
+            // Render accordion
+            accordionContainer.innerHTML = '';
+            sortedMonths.forEach(monthYear => {
+                const accordionItem = document.createElement('div');
+                accordionItem.classList.add('accordion-item');
+
+                const header = document.createElement('div');
+                header.classList.add('accordion-header');
+                header.textContent = monthYear;
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    content.style.display = content.style.display === 'block' ? 'none' : 'block';
+                });
+
+                const content = document.createElement('div');
+                content.classList.add('accordion-content');
+                groupedEntries[monthYear].forEach(entry => {
+                    const entryDiv = document.createElement('div');
+                    entryDiv.classList.add('entry');
+                    entryDiv.innerHTML = `
+                        <div class="mood">${entry.mood}</div>
+                        <div class="date">${entry.date}</div>
+                        <p>${entry.text}</p>
+                    `;
+                    content.appendChild(entryDiv);
+                });
+
+                accordionItem.appendChild(header);
+                accordionItem.appendChild(content);
+                accordionContainer.appendChild(accordionItem);
+            });
+        }
+
+        // Add a new entry to the database
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const text = document.getElementById('entryText').value;
+            const mood = document.querySelector('input[name="mood"]:checked')?.value;
+            const date = document.getElementById('entryDate').value || new Date().toISOString().split('T')[0];
+
+            if (!text || !mood) {
+                alert('Please write an entry and select a mood!');
+                return;
+            }
+
+            const newEntry = {
+                text,
+                mood,
+                date
+            };
+
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newEntry)
+            });
+
+            if (response.ok) {
+                loadEntries();
+                form.reset();
+            } else {
+                alert('Failed to add entry.');
+            }
+        });
+
+        // Load entries on page load
+        loadEntries();
+    </script>
+</body>
+</html>
